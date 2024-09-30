@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #faf8ef;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            padding: 50px;
+            background-color: #fff;
+            color: #d4af37;
+            border-bottom: 3px solid #d4af37;
+        }
+
+        .header h1 {
+            font-size: 60px;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .header p {
+            font-size: 24px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .details {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .details p {
+            font-size: 22px;
+            margin: 15px 0;
+        }
+
+        .countdown {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 30px;
+            color: #d4af37;
+        }
+
+        .rsvp {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .rsvp a {
+            background-color: #d4af37;
+            color: #fff;
+            padding: 12px 25px;
+            text-decoration: none;
+            font-size: 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .rsvp a:hover {
+            background-color: #b8952f;
+        }
+
+        .location {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .location iframe {
+            border: 3px solid #d4af37;
+            border-radius: 10px;
+            width: 100%;
+            height: 300px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #fff;
+            color: #333;
+            border-top: 3px solid #d4af37;
+        }
+
+        .footer p {
+            font-size: 18px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Wedding Invitation</h1>
+        <p>You're invited to celebrate the wedding of</p>
+    </div>
+
+    <div class="container">
+        <div class="details">
+            <p><strong>John Doe</strong></p>
+            <p>and</p>
+            <p><strong>Jane Smith</strong></p>
+            <p>on</p>
+            <p><strong>Saturday, 12th October 2024</strong></p>
+            <p>at</p>
+            <p><strong>The Grand Ballroom, City Hall</strong></p>
+        </div>
+
+        <div class="countdown" id="countdown">
+            Countdown: <span id="days"></span> Days <span id="hours"></span> Hours <span id="minutes"></span> Minutes <span id="seconds"></span> Seconds
+        </div>
+
+        <div class="rsvp">
+            <a href="#rsvp">RSVP Now</a>
+        </div>
+
+        <div class="location">
+            <h2>Location</h2>
+            <iframe src="https://maps.google.com/maps?q=The%20Grand%20Ballroom%2C%20City%20Hall&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>We look forward to celebrating with you!</p>
+    </div>
+
+    <script>
+        // Countdown Timer
+        const weddingDate = new Date("Oct 12, 2024 16:00:00").getTime();
+        const countdown = document.getElementById("countdown");
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+            if (distance < 0) {
+                countdown.innerHTML = "The wedding has started!";
+            }
+        };
+
+        setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>
