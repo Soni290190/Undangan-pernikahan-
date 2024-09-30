@@ -33,24 +33,44 @@
 
         .container {
             max-width: 800px;
-            margin: 40px auto;
+            margin: 0 auto;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+            transform: scale(0);
+            animation: openAnimation 2s forwards;
         }
 
-        .details {
-            text-align: center;
-            margin-top: 30px;
+        @keyframes openAnimation {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
-        .details p {
-            font-size: 22px;
-            margin: 15px 0;
+        .details, .countdown, .rsvp, .location {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.5s ease-in-out forwards;
+            animation-delay: 2s;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .countdown {
+            animation-delay: 3s;
             text-align: center;
             margin-top: 40px;
             font-size: 30px;
@@ -58,6 +78,7 @@
         }
 
         .rsvp {
+            animation-delay: 4s;
             text-align: center;
             margin-top: 40px;
         }
@@ -77,6 +98,7 @@
         }
 
         .location {
+            animation-delay: 5s;
             text-align: center;
             margin-top: 40px;
         }
@@ -95,14 +117,14 @@
             color: #333;
             border-top: 3px solid #d4af37;
         }
-
-        .footer p {
-            font-size: 18px;
-            margin: 0;
-        }
     </style>
 </head>
 <body>
+
+    <audio id="backgroundMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <div class="header">
         <h1>Wedding Invitation</h1>
@@ -125,7 +147,7 @@
         </div>
 
         <div class="rsvp">
-            <a href="#rsvp">RSVP Now</a>
+            <a href="#">RSVP Now</a>
         </div>
 
         <div class="location">
@@ -139,6 +161,12 @@
     </div>
 
     <script>
+        // Musik background otomatis diputar saat halaman dibuka
+        window.onload = function() {
+            var audio = document.getElementById("backgroundMusic");
+            audio.play();
+        };
+
         // Countdown Timer
         const weddingDate = new Date("Oct 12, 2024 16:00:00").getTime();
         const countdown = document.getElementById("countdown");
@@ -158,11 +186,12 @@
             document.getElementById("seconds").innerHTML = seconds;
 
             if (distance < 0) {
-                countdown.innerHTML = "The wedding has started!";
+                clearInterval(interval);
+                countdown.innerHTML = "The event has started!";
             }
         };
 
-        setInterval(updateCountdown, 1000);
+        const interval = setInterval(updateCountdown, 1000);
     </script>
 
 </body>
